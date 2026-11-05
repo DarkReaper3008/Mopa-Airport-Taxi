@@ -53,6 +53,38 @@ export default function App() {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Scroll fade-in transition observer for content cards
+    let cardObserver: IntersectionObserver | null = null;
+    if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
+      cardObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        root: null,
+        rootMargin: '0px 0px -40px 0px',
+        threshold: 0.12
+      });
+
+      // Small delay to allow initial DOM paint
+      const observerTimeout = setTimeout(() => {
+        document.querySelectorAll('.scroll-fade-in').forEach(el => {
+          cardObserver?.observe(el);
+        });
+      }, 100);
+
+      return () => {
+        clearTimeout(timer);
+        clearTimeout(observerTimeout);
+        cardObserver?.disconnect();
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }
+
     return () => {
       clearTimeout(timer);
       window.removeEventListener('scroll', handleScroll);
@@ -82,7 +114,7 @@ export default function App() {
       setIsSubmitting(false);
       setBookingSuccess(true);
       const message = `Hi, I want to book an airport taxi from Mopa%0A%0A*Car:* White Suzuki Sedan (GA11T4559)%0A*Pickup:* ${pickup}%0A*Drop-off:* ${dropoff}%0A*Date:* ${tripDate} at ${tripTime}%0A*Name:* ${passengerName}%0A*Phone:* ${passengerPhone}%0A%0APlease confirm best rates and availability!`;
-      window.open(`https://wa.me/919834778997?text=${message}`, '_blank');
+      window.open(`https://wa.me/919834778997?text=${message}`, '_blank', 'noopener,noreferrer');
       
       setTimeout(() => setBookingSuccess(false), 8000);
     }, 800);
@@ -433,7 +465,7 @@ export default function App() {
           <div className="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto w-full box-border">
             
             {/* Service 1: Mopa Airport Arrivals */}
-            <div className="bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-sm space-y-4 flex flex-col justify-between w-full box-border">
+            <div className="scroll-fade-in stagger-1 bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-sm space-y-4 flex flex-col justify-between w-full box-border hover:shadow-md transition-shadow">
               <div className="space-y-3 sm:space-y-4">
                 <div className="w-12 h-12 rounded-2xl bg-blue-100 flex items-center justify-center text-blue-700">
                   <Plane className="w-6 h-6" />
@@ -453,7 +485,7 @@ export default function App() {
             </div>
 
             {/* Service 2: Mopa Airport Departures */}
-            <div className="bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-sm space-y-4 flex flex-col justify-between w-full box-border">
+            <div className="scroll-fade-in stagger-2 bg-white border border-slate-200 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-sm space-y-4 flex flex-col justify-between w-full box-border hover:shadow-md transition-shadow">
               <div className="space-y-3 sm:space-y-4">
                 <div className="w-12 h-12 rounded-2xl bg-emerald-100 flex items-center justify-center text-emerald-700">
                   <Navigation className="w-6 h-6" />
@@ -721,7 +753,7 @@ export default function App() {
               </p>
 
               <div className="space-y-3 sm:space-y-4 pt-1">
-                <div className="flex items-center gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 min-w-0">
+                <div className="scroll-fade-in stagger-1 flex items-center gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 min-w-0">
                   <div className="w-10 h-10 rounded-lg bg-blue-900 text-white flex items-center justify-center shrink-0 font-bold">
                     01
                   </div>
@@ -731,7 +763,7 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 min-w-0">
+                <div className="scroll-fade-in stagger-2 flex items-center gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 min-w-0">
                   <div className="w-10 h-10 rounded-lg bg-blue-900 text-white flex items-center justify-center shrink-0 font-bold">
                     02
                   </div>
@@ -741,7 +773,7 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 min-w-0">
+                <div className="scroll-fade-in stagger-3 flex items-center gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 min-w-0">
                   <div className="w-10 h-10 rounded-lg bg-blue-900 text-white flex items-center justify-center shrink-0 font-bold">
                     03
                   </div>
@@ -755,7 +787,7 @@ export default function App() {
 
             <div className="lg:col-span-7 w-full max-w-full box-border">
               <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 w-full box-border">
-                <div className="bg-slate-900 text-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 space-y-3 sm:space-y-4 shadow-xl">
+                <div className="scroll-fade-in stagger-1 bg-slate-900 text-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 space-y-3 sm:space-y-4 shadow-xl">
                   <div className="w-12 h-12 rounded-2xl bg-amber-400/20 text-amber-400 flex items-center justify-center">
                     <Plane className="w-6 h-6" />
                   </div>
@@ -765,7 +797,7 @@ export default function App() {
                   </p>
                 </div>
 
-                <div className="bg-blue-900 text-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 space-y-3 sm:space-y-4 shadow-xl">
+                <div className="scroll-fade-in stagger-2 bg-blue-900 text-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 space-y-3 sm:space-y-4 shadow-xl">
                   <div className="w-12 h-12 rounded-2xl bg-emerald-400/20 text-emerald-400 flex items-center justify-center">
                     <ShieldCheck className="w-6 h-6" />
                   </div>
@@ -775,7 +807,7 @@ export default function App() {
                   </p>
                 </div>
 
-                <div className="bg-blue-50 border border-blue-200 rounded-2xl sm:rounded-3xl p-5 sm:p-8 space-y-3 sm:space-y-4 sm:col-span-2">
+                <div className="scroll-fade-in stagger-3 bg-blue-50 border border-blue-200 rounded-2xl sm:rounded-3xl p-5 sm:p-8 space-y-3 sm:space-y-4 sm:col-span-2">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-blue-700 text-white flex items-center justify-center shrink-0">
                       <Star className="w-5 h-5 text-amber-400 fill-amber-400" />
