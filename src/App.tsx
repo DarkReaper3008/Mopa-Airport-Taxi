@@ -27,7 +27,9 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [pickup, setPickup] = useState('Manohar International Airport - Mopa (GOX)');
-  const [dropoff, setDropoff] = useState('Calangute / Baga / Candolim');
+  const [customPickup, setCustomPickup] = useState('');
+  const [dropoff, setDropoff] = useState('Custom Location / Hotel / Address in Goa');
+  const [customDropoff, setCustomDropoff] = useState('');
   const [tripDate, setTripDate] = useState('2026-11-06');
   const [tripTime, setTripTime] = useState('10:00');
   const [passengerName, setPassengerName] = useState('');
@@ -113,7 +115,18 @@ export default function App() {
     setTimeout(() => {
       setIsSubmitting(false);
       setBookingSuccess(true);
-      const message = `Hi, I want to book an airport taxi from Mopa%0A%0A*Car:* White Suzuki Sedan (GA11T4559)%0A*Pickup:* ${pickup}%0A*Drop-off:* ${dropoff}%0A*Date:* ${tripDate} at ${tripTime}%0A*Name:* ${passengerName}%0A*Phone:* ${passengerPhone}%0A%0APlease confirm best rates and availability!`;
+      
+      let finalPickup = pickup;
+      if (pickup === 'Custom Location / Hotel / Address in Goa' && customPickup.trim()) {
+        finalPickup = customPickup.trim();
+      }
+
+      let finalDropoff = dropoff;
+      if (dropoff === 'Custom Location / Hotel / Address in Goa' && customDropoff.trim()) {
+        finalDropoff = customDropoff.trim();
+      }
+
+      const message = `Hi, I want to book an airport taxi from Mopa%0A%0A*Car:* White Suzuki Sedan (GA11T4559)%0A*Pickup:* ${encodeURIComponent(finalPickup)}%0A*Drop-off:* ${encodeURIComponent(finalDropoff)}%0A*Date:* ${encodeURIComponent(tripDate)} at ${encodeURIComponent(tripTime)}%0A*Name:* ${encodeURIComponent(passengerName)}%0A*Phone:* ${encodeURIComponent(passengerPhone)}%0A%0APlease confirm best rates and availability!`;
       window.open(`https://wa.me/919834778997?text=${message}`, '_blank', 'noopener,noreferrer');
       
       setTimeout(() => setBookingSuccess(false), 8000);
@@ -598,14 +611,20 @@ export default function App() {
                               className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-10 pr-3 py-3 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-blue-700 font-medium min-h-[44px] box-border"
                             >
                               <option value="Manohar International Airport - Mopa (GOX)">Manohar International Airport - Mopa (GOX)</option>
-                              <option value="Casnem / Poroscodem Base Office">Casnem / Poroscodem Base Office</option>
-                              <option value="Calangute / Baga / Candolim">Calangute / Baga / Candolim</option>
-                              <option value="Anjuna / Vagator / Morjim / Arambol">Anjuna / Vagator / Morjim / Arambol</option>
-                              <option value="Panaji City / Old Goa">Panaji City / Old Goa</option>
-                              <option value="Thivim Railway Station">Thivim Railway Station</option>
-                              <option value="Custom Hotel / Address in Goa">Custom Hotel / Address in Goa</option>
+                              <option value="Custom Location / Hotel / Address in Goa">Custom Location / Hotel / Address in Goa</option>
                             </select>
                           </div>
+                          {pickup === 'Custom Location / Hotel / Address in Goa' && (
+                            <div className="mt-2 animate-fade-in">
+                              <input 
+                                type="text"
+                                placeholder="Type custom hotel, villa, or pickup address in Goa"
+                                value={customPickup}
+                                onChange={(e) => setCustomPickup(e.target.value)}
+                                className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-blue-700 font-medium min-h-[40px] box-border"
+                              />
+                            </div>
+                          )}
                         </div>
 
                         <div className="w-full">
@@ -617,15 +636,21 @@ export default function App() {
                               onChange={(e) => setDropoff(e.target.value)}
                               className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-10 pr-3 py-3 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-emerald-600 font-medium min-h-[44px] box-border"
                             >
-                              <option value="Calangute / Baga / Candolim">Calangute / Baga / Candolim</option>
-                              <option value="Anjuna / Vagator / Siolim">Anjuna / Vagator / Siolim</option>
-                              <option value="Morjim / Ashwem / Arambol / Mandrem">Morjim / Ashwem / Arambol / Mandrem</option>
-                              <option value="Panaji City / Miramar">Panaji City / Miramar</option>
+                              <option value="Custom Location / Hotel / Address in Goa">Custom Location / Hotel / Address in Goa</option>
                               <option value="Manohar International Airport - Mopa (GOX)">Manohar International Airport - Mopa (GOX)</option>
-                              <option value="Thivim Railway Station">Thivim Railway Station</option>
-                              <option value="South Goa / Other Destination">South Goa / Other Destination</option>
                             </select>
                           </div>
+                          {dropoff === 'Custom Location / Hotel / Address in Goa' && (
+                            <div className="mt-2 animate-fade-in">
+                              <input 
+                                type="text"
+                                placeholder="Type custom hotel, resort, or drop address in Goa"
+                                value={customDropoff}
+                                onChange={(e) => setCustomDropoff(e.target.value)}
+                                className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-emerald-600 font-medium min-h-[40px] box-border"
+                              />
+                            </div>
+                          )}
                         </div>
                       </div>
 

@@ -557,13 +557,11 @@
                     <div class="relative w-full">
                       <select id="pickup-field" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-3 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-blue-700 font-medium min-h-[44px] box-border">
                         <option value="Manohar International Airport - Mopa (GOX)" selected>Manohar International Airport - Mopa (GOX)</option>
-                        <option value="Casnem / Poroscodem Base Office">Casnem / Poroscodem Base Office</option>
-                        <option value="Calangute / Baga / Candolim">Calangute / Baga / Candolim</option>
-                        <option value="Anjuna / Vagator / Morjim / Arambol">Anjuna / Vagator / Morjim / Arambol</option>
-                        <option value="Panaji City / Old Goa">Panaji City / Old Goa</option>
-                        <option value="Thivim Railway Station">Thivim Railway Station</option>
-                        <option value="Custom Hotel / Address in Goa">Custom Hotel / Address in Goa</option>
+                        <option value="Custom Location / Hotel / Address in Goa">Custom Location / Hotel / Address in Goa</option>
                       </select>
+                    </div>
+                    <div id="custom-pickup-container" class="mt-2 hidden">
+                      <input id="custom-pickup-field" type="text" placeholder="Type custom hotel, villa, or pickup address in Goa" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-blue-700 font-medium min-h-[40px] box-border" />
                     </div>
                   </div>
 
@@ -571,14 +569,12 @@
                     <label for="dropoff-field" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Drop-off Destination</label>
                     <div class="relative w-full">
                       <select id="dropoff-field" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-3 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-emerald-600 font-medium min-h-[44px] box-border">
-                        <option value="Calangute / Baga / Candolim" selected>Calangute / Baga / Candolim</option>
-                        <option value="Anjuna / Vagator / Siolim">Anjuna / Vagator / Siolim</option>
-                        <option value="Morjim / Ashwem / Arambol / Mandrem">Morjim / Ashwem / Arambol / Mandrem</option>
-                        <option value="Panaji City / Miramar">Panaji City / Miramar</option>
+                        <option value="Custom Location / Hotel / Address in Goa" selected>Custom Location / Hotel / Address in Goa</option>
                         <option value="Manohar International Airport - Mopa (GOX)">Manohar International Airport - Mopa (GOX)</option>
-                        <option value="Thivim Railway Station">Thivim Railway Station</option>
-                        <option value="South Goa / Other Destination">South Goa / Other Destination</option>
                       </select>
+                    </div>
+                    <div id="custom-dropoff-container" class="mt-2">
+                      <input id="custom-dropoff-field" type="text" placeholder="Type custom hotel, resort, or drop address in Goa" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 focus:outline-none focus:border-emerald-600 font-medium min-h-[40px] box-border" />
                     </div>
                   </div>
                 </div>
@@ -1108,11 +1104,38 @@
         const dropoffField = document.getElementById('dropoff-field');
         const dateField = document.getElementById('date-field');
         const timeField = document.getElementById('time-field');
+        const customPickupContainer = document.getElementById('custom-pickup-container');
+        const customPickupField = document.getElementById('custom-pickup-field');
+        const customDropoffContainer = document.getElementById('custom-dropoff-container');
+        const customDropoffField = document.getElementById('custom-dropoff-field');
         const nameError = document.getElementById('name-error');
         const phoneError = document.getElementById('phone-error');
         const submitBtn = document.getElementById('submit-booking-btn');
         const submitBtnText = document.getElementById('submit-btn-text');
         const successBanner = document.getElementById('booking-success-banner');
+
+        // Dynamic toggle for Custom Location text inputs
+        if (pickupField && customPickupContainer) {
+          pickupField.addEventListener('change', function () {
+            if (pickupField.value === 'Custom Location / Hotel / Address in Goa') {
+              customPickupContainer.classList.remove('hidden');
+              if (customPickupField) customPickupField.focus();
+            } else {
+              customPickupContainer.classList.add('hidden');
+            }
+          });
+        }
+
+        if (dropoffField && customDropoffContainer) {
+          dropoffField.addEventListener('change', function () {
+            if (dropoffField.value === 'Custom Location / Hotel / Address in Goa') {
+              customDropoffContainer.classList.remove('hidden');
+              if (customDropoffField) customDropoffField.focus();
+            } else {
+              customDropoffContainer.classList.add('hidden');
+            }
+          });
+        }
 
         if (bookingForm) {
           bookingForm.addEventListener('submit', function (e) {
@@ -1121,8 +1144,19 @@
             let hasError = false;
             const name = nameField ? nameField.value.trim() : '';
             const phone = phoneField ? phoneField.value.trim() : '';
-            const pickup = pickupField ? pickupField.value : 'Manohar International Airport - Mopa (GOX)';
-            const dropoff = dropoffField ? dropoffField.value : 'Calangute / Baga / Candolim';
+            
+            // Resolve pickup location
+            let pickup = pickupField ? pickupField.value : 'Manohar International Airport - Mopa (GOX)';
+            if (pickup === 'Custom Location / Hotel / Address in Goa' && customPickupField && customPickupField.value.trim()) {
+              pickup = customPickupField.value.trim();
+            }
+
+            // Resolve drop-off location
+            let dropoff = dropoffField ? dropoffField.value : 'Custom Location / Hotel / Address in Goa';
+            if (dropoff === 'Custom Location / Hotel / Address in Goa' && customDropoffField && customDropoffField.value.trim()) {
+              dropoff = customDropoffField.value.trim();
+            }
+
             const date = dateField ? dateField.value : '';
             const time = timeField ? timeField.value : '';
 
