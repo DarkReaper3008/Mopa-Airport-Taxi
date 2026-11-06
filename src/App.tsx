@@ -778,7 +778,7 @@ export default function App() {
               </p>
 
               <div className="space-y-3 sm:space-y-4 pt-1">
-                <div className="scroll-fade-in stagger-1 flex items-center gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 min-w-0">
+                <div className="scroll-fade-in stagger-1 feature-card-hover-sm flex items-center gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 min-w-0 hover:border-blue-300 hover:bg-white cursor-pointer">
                   <div className="w-10 h-10 rounded-lg bg-blue-900 text-white flex items-center justify-center shrink-0 font-bold">
                     01
                   </div>
@@ -788,7 +788,7 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="scroll-fade-in stagger-2 flex items-center gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 min-w-0">
+                <div className="scroll-fade-in stagger-2 feature-card-hover-sm flex items-center gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 min-w-0 hover:border-blue-300 hover:bg-white cursor-pointer">
                   <div className="w-10 h-10 rounded-lg bg-blue-900 text-white flex items-center justify-center shrink-0 font-bold">
                     02
                   </div>
@@ -798,7 +798,7 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="scroll-fade-in stagger-3 flex items-center gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 min-w-0">
+                <div className="scroll-fade-in stagger-3 feature-card-hover-sm flex items-center gap-3 sm:gap-4 p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 min-w-0 hover:border-blue-300 hover:bg-white cursor-pointer">
                   <div className="w-10 h-10 rounded-lg bg-blue-900 text-white flex items-center justify-center shrink-0 font-bold">
                     03
                   </div>
@@ -812,7 +812,7 @@ export default function App() {
 
             <div className="lg:col-span-7 w-full max-w-full box-border">
               <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 w-full box-border">
-                <div className="scroll-fade-in stagger-1 bg-slate-900 text-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 space-y-3 sm:space-y-4 shadow-xl">
+                <div className="scroll-fade-in stagger-1 feature-card-hover bg-slate-900 text-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 space-y-3 sm:space-y-4 shadow-xl border border-slate-800 hover:border-amber-400/40 cursor-pointer">
                   <div className="w-12 h-12 rounded-2xl bg-amber-400/20 text-amber-400 flex items-center justify-center">
                     <Plane className="w-6 h-6" />
                   </div>
@@ -822,7 +822,7 @@ export default function App() {
                   </p>
                 </div>
 
-                <div className="scroll-fade-in stagger-2 bg-blue-900 text-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 space-y-3 sm:space-y-4 shadow-xl">
+                <div className="scroll-fade-in stagger-2 feature-card-hover bg-blue-900 text-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 space-y-3 sm:space-y-4 shadow-xl border border-blue-800 hover:border-emerald-400/40 cursor-pointer">
                   <div className="w-12 h-12 rounded-2xl bg-emerald-400/20 text-emerald-400 flex items-center justify-center">
                     <ShieldCheck className="w-6 h-6" />
                   </div>
@@ -832,7 +832,7 @@ export default function App() {
                   </p>
                 </div>
 
-                <div className="scroll-fade-in stagger-3 bg-blue-50 border border-blue-200 rounded-2xl sm:rounded-3xl p-5 sm:p-8 space-y-3 sm:space-y-4 sm:col-span-2">
+                <div className="scroll-fade-in stagger-3 feature-card-hover bg-blue-50 border border-blue-200 rounded-2xl sm:rounded-3xl p-5 sm:p-8 space-y-3 sm:space-y-4 sm:col-span-2 hover:border-blue-400 hover:bg-blue-50/90 cursor-pointer">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-xl bg-blue-700 text-white flex items-center justify-center shrink-0">
                       <Star className="w-5 h-5 text-amber-400 fill-amber-400" />

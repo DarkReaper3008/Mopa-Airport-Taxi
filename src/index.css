@@ -49,5 +49,27 @@
       transform: none !important;
       transition: none !important;
     }
+    .feature-card-hover:hover,
+    .feature-card-hover-sm:hover {
+      transform: none !important;
+    }
+  }
+
+  /* Smooth Scale-Up Animation on Hover for Why Ride Feature Cards */
+  .feature-card-hover {
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.35s ease;
+    will-change: transform, box-shadow;
+  }
+  .feature-card-hover:hover {
+    transform: scale(1.035) translateY(-4px) !important;
+    box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.18), 0 8px 10px -6px rgba(15, 23, 42, 0.12) !important;
+  }
+  .feature-card-hover-sm {
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.3s ease;
+    will-change: transform, box-shadow;
+  }
+  .feature-card-hover-sm:hover {
+    transform: scale(1.025) translateX(4px) !important;
+    box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.08) !important;
   }
 }
