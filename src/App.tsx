@@ -19,7 +19,8 @@ import {
   HelpCircle, 
   AlertCircle, 
   Loader2,
-  Navigation
+  Navigation,
+  ChevronUp
 } from 'lucide-react';
 
 export default function App() {
@@ -38,6 +39,7 @@ export default function App() {
   // Form validation & submission states
   const [formErrors, setFormErrors] = useState<{ name?: string; phone?: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
   const [bookingSuccess, setBookingSuccess] = useState(false);
 
   // Initial load skeleton simulation & scroll progress listener
@@ -52,6 +54,7 @@ export default function App() {
         const currentProgress = (window.scrollY / totalScroll) * 100;
         setScrollProgress(currentProgress);
       }
+      setShowBackToTop(window.scrollY > 380);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -1157,6 +1160,17 @@ export default function App() {
 
         </div>
       </footer>
+
+      {/* Floating Back-to-Top Button */}
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        aria-label="Back to top"
+        className={`fixed bottom-20 right-4 sm:bottom-6 sm:right-6 z-40 bg-blue-900 hover:bg-blue-800 active:bg-blue-950 text-white p-3 sm:p-3.5 rounded-full shadow-2xl border border-blue-700/60 transition-all duration-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400 ${
+          showBackToTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+        }`}
+      >
+        <ChevronUp className="w-5 h-5 text-amber-400 stroke-[2.5]" />
+      </button>
 
       {/* Floating Mobile Sticky Bar */}
       <div className="fixed bottom-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 px-3 py-2.5 sm:hidden flex items-center justify-between gap-2.5 shadow-2xl w-full box-border">

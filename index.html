@@ -1035,6 +1035,17 @@
       </div>
     </footer>
 
+    <!-- Floating Back-to-Top Button (Appears after scrolling past Hero section) -->
+    <button 
+      id="back-to-top-btn" 
+      aria-label="Back to Top"
+      class="fixed bottom-20 right-4 sm:bottom-6 sm:right-6 z-40 bg-blue-900 hover:bg-blue-800 active:bg-blue-950 text-white p-3 sm:p-3.5 rounded-full shadow-2xl border border-blue-700/60 transition-all duration-300 opacity-0 pointer-events-none translate-y-4 cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber-400"
+    >
+      <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"/>
+      </svg>
+    </button>
+
     <!-- Floating Mobile Sticky Bottom Bar -->
     <div class="fixed bottom-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 px-3 py-2.5 sm:hidden flex items-center justify-between gap-2.5 shadow-2xl w-full box-border">
       <a href="tel:+919834778997" class="flex-1 flex items-center justify-center gap-1.5 py-3 bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-bold rounded-xl text-xs shadow-md min-h-[44px] text-center">
@@ -1051,15 +1062,38 @@
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         
-        // 1. Scroll Progress Bar
+        // 1. Scroll Progress Bar & Back-to-Top Toggle
         const progressBar = document.getElementById('scroll-progress-bar');
-        window.addEventListener('scroll', function () {
+        const backToTopBtn = document.getElementById('back-to-top-btn');
+        const heroSection = document.querySelector('section');
+
+        function handleScrollVisibility() {
           const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-          if (totalHeight > 0) {
+          if (totalHeight > 0 && progressBar) {
             const progress = (window.scrollY / totalHeight) * 100;
-            if (progressBar) progressBar.style.width = progress + '%';
+            progressBar.style.width = progress + '%';
           }
-        }, { passive: true });
+
+          if (backToTopBtn) {
+            const heroHeight = heroSection ? heroSection.offsetHeight : 450;
+            if (window.scrollY > heroHeight - 100) {
+              backToTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+              backToTopBtn.classList.add('opacity-100', 'translate-y-0');
+            } else {
+              backToTopBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+              backToTopBtn.classList.remove('opacity-100', 'translate-y-0');
+            }
+          }
+        }
+
+        window.addEventListener('scroll', handleScrollVisibility, { passive: true });
+        handleScrollVisibility();
+
+        if (backToTopBtn) {
+          backToTopBtn.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          });
+        }
 
         // 2. Subtle Fade-in on Scroll (Services Offered & Why Choose Us cards)
         const scrollCards = document.querySelectorAll('.scroll-fade-in');
