@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://darkreaper3008.github.io/Mopa-Airport-Taxi/sitemap.xml
