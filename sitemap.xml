@@ -3,7 +3,67 @@
   <url>
     <loc>https://darkreaper3008.github.io/Mopa-Airport-Taxi/</loc>
     <lastmod>2026-11-17</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://darkreaper3008.github.io/Mopa-Airport-Taxi/mopa-airport-taxi/</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://darkreaper3008.github.io/Mopa-Airport-Taxi/taxi-from-mopa-airport/</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://darkreaper3008.github.io/Mopa-Airport-Taxi/mopa-airport-taxi-to-pernem/</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://darkreaper3008.github.io/Mopa-Airport-Taxi/mopa-airport-taxi-to-north-goa/</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://darkreaper3008.github.io/Mopa-Airport-Taxi/mopa-airport-taxi-to-calangute/</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://darkreaper3008.github.io/Mopa-Airport-Taxi/mopa-airport-taxi-to-candolim/</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://darkreaper3008.github.io/Mopa-Airport-Taxi/mopa-airport-taxi-to-anjuna/</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://darkreaper3008.github.io/Mopa-Airport-Taxi/mopa-airport-taxi-to-vagator/</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://darkreaper3008.github.io/Mopa-Airport-Taxi/mopa-airport-taxi-to-arambol/</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://darkreaper3008.github.io/Mopa-Airport-Taxi/mopa-airport-taxi-to-morjim/</loc>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>
